@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PaperIT</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f8f9;
+    color:#0b2545;
+}
+
+h1,h2,h3{
+    margin-bottom:15px;
+}
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:20px 80px;
+    background:#89CFF0;
+    color:white;
+}
+
+nav ul{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:orange;
+}
+
+.hero{
+    text-align:center;
+    padding:60px;
+}
+
+.hero h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.hero button{
+    margin-top:20px;
+    padding:12px 25px;
+    border:none;
+    background:#89CFF0;
+    color:white;
+    border-radius:25px;
+    cursor:pointer;
+}
+
+.hero button:hover{
+    background:orange;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:30px;
+    padding:40px 80px;
+}
+
+.card{
+    background:white;
+    padding:40px;
+    border-radius:15px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.card:hover{
+    background:orange;
+    color:white;
+    transform:translateY(-8px);
+}
+
+.page{
+    display:none;
+    padding:50px;
+    text-align:center;
+}
+
+.paper{
+    background:white;
+    padding:20px;
+    margin:20px auto;
+    width:350px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.button-row{
+    display:flex;
+    justify-content:center;
+    gap:20px;
+    margin-top:15px;
+    flex-wrap:wrap;
+}
+
+button{
+    background:#89CFF0;
+    color:white;
+    border:none;
+    padding:10px 20px;
+    border-radius:20px;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+button:hover{
+    background:orange;
+}
+
+iframe{
+    border-radius:10px;
+}
+
+.chart-box{
+    width:70%;
+    margin:auto;
+    margin-top:40px;
+}
+
+.contact{
+    background:#89CFF0;
+    color:white;
+    padding:40px;
+    text-align:center;
+    margin-top:40px;
+}
+
+footer{
+    background:#448ee4;
+    color:white;
+    text-align:center;
+    padding:15px;
+}
+
+/* FORM STYLING */
+form{
+    background:#fff;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.2);
+    width:350px;
+}
+
+h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+input[type=text],
+input[type=number]{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+    border:1px solid #ccc;
+    border-radius:5px;
+}
+
+/* CENTERING THE FORM */
+.form-container{
+    display:flex;
+    justify-content:center; /* horizontal center */
+    margin-top:30px;        /* space from chart */
+}
+</style>
+
+</head>
+
+<body>
+
+<nav>
+<h2>PaperIT</h2>
+<ul>
+<li><a onclick="showPage('home')">Home</a></li>
+<li><a onclick="showPage('past')">Past Papers</a></li>
+<li><a onclick="showPage('model')">Model Papers</a></li>
+<li><a onclick="showPage('discussion')">Discussion</a></li>
+<li><a onclick="showPage('progress')">Progress</a></li>
+</ul>
+</nav>
+
+<!-- HOME PAGE -->
+
+<section id="home">
+<div class="hero">
+<h1>Master ICT With Quality Papers</h1>
+<p>Download ICT papers, watch discussions and track your progress.</p>
+<button onclick="showPage('past')">Explore Papers</button>
+</div>
+
+<div class="dashboard">
+<div class="card" onclick="showPage('past')">
+<h3>📄 Past Papers</h3>
+<p>Download ICT examination papers</p>
+</div>
+<div class="card" onclick="showPage('model')">
+<h3>📝 Model Papers</h3>
+<p>Practice using model papers</p>
+</div>
+<div class="card" onclick="showPage('discussion')">
+<h3>💬 Discussion</h3>
+<p>Watch paper discussion videos</p>
+</div>
+<div class="card" onclick="showPage('progress')">
+<h3>📊 Progress</h3>
+<p>Track your exam progress</p>
+</div>
+</div>
+
+<div class="chart-box">
+<h2>Class Average vs Highest Score</h2>
+<canvas id="homeChart"></canvas>
+</div>
+</section>
+
+<!-- PAST PAPERS -->
+
+<section id="past" class="page">
+<h1>ICT Past Papers</h1>
+<div class="paper">
+<h3>2025 ICT Paper</h3>
+<div class="button-row">
+<button>Download</button>
+<button>View</button>
+</div>
+</div>
+<div class="paper">
+<h3>2024 ICT Paper</h3>
+<div class="button-row">
+<button>Download</button>
+<button>View</button>
+</div>
+</div>
+<div class="paper">
+<h3>2023 ICT Paper</h3>
+<div class="button-row">
+<button>Download</button>
+<button>View</button>
+</div>
+</div>
+<div class="paper">
+<h3>2022 ICT Paper</h3>
+<div class="button-row">
+<button>Download</button>
+<button>View</button>
+</div>
+</div>
+<div class="button-row">
+<button onclick="showPage('home')">Back</button>
+</div>
+</section>
+
+<!-- MODEL PAPERS -->
+
+<section id="model" class="page">
+<h1>ICT Model Papers</h1>
+<div class="paper">
+<h3>Model Paper 1</h3>
+<div class="button-row">
+<button>Start Practice</button>
+<button>View Answers</button>
+</div>
+</div>
+<div class="paper">
+<h3>Model Paper 2</h3>
+<div class="button-row">
+<button>Start Practice</button>
+<button>View Answers</button>
+</div>
+</div>
+<div class="button-row">
+<button onclick="showPage('home')">Back</button>
+</div>
+</section>
+
+<!-- DISCUSSION -->
+
+<section id="discussion" class="page">
+<h1>ICT Paper Discussion</h1>
+<iframe width="700" height="400"
+src="https://www.youtube.com/watch?v=4XYfY5HEA4A"
+allowfullscreen></iframe>
+<br><br>
+<button onclick="showPage('home')">Back</button>
+</section>
+
+<!-- PROGRESS -->
+
+<section id="progress" class="page">
+<h1>Your Progress</h1>
+
+<div class="chart-box">
+<h2>Your Marks vs Class Average</h2>
+<canvas id="progressChart"></canvas>
+</div>
+
+<!-- CENTERED FORM -->
+
+<div class="form-container">
+<form action="add_marks.php" method="POST">
+<h2>Add Recent Marks</h2>
+<label for="student">Student Name</label>
+<input type="text" id="student" name="student" required>
+
+<label for="subject">Paper Number</label> <input type="text" id="Paper Number" name="Paper Number" required>
+
+<label for="marks">Marks</label> <input type="number" id="marks" name="marks" min="0" max="100" required>
+
+<button type="submit">Add Marks</button>
+
+</form>
+</div>
+
+<br>
+<button onclick="showPage('home')">Back</button>
+</section>
+
+<section class="contact">
+<h2>Contact Us</h2>
+<p>Email: PaperIT@email.com</p>
+<p>Location: Negombo, Sri Lanka</p>
+</section>
+
+<footer>
+© 2026 PaperIT 
+</footer>
+
+<script>
+function showPage(page){
+    document.getElementById("home").style.display="none";
+    document.getElementById("past").style.display="none";
+    document.getElementById("model").style.display="none";
+    document.getElementById("discussion").style.display="none";
+    document.getElementById("progress").style.display="none";
+    document.getElementById(page).style.display="block";
+}
+
+/* HOME PAGE LINE CHART */
+new Chart(document.getElementById("homeChart"),
+{
+type:'line',
+
+data:{
+
+labels:['Paper 1','Paper 2','Paper 3','Paper 4','Paper 5','Paper 6','Paper 7','Paper 8','Paper 9','Paper 10'],
+
+datasets:[
+{ 
+label:'Class Average', data:[65,72,68,75,60,67,78,65,61,70], borderColor:'orange', tension:0.4, fill:false },
+
+{ label:'Highest Score', data:[98,89,90,84,87,79,81,83,80,93], borderColor:'#89CFF0', backgroundColor:'rgba(137,207,240,0.2)', tension:0.4, fill:true }
+]
+},
+options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:100 } } }
+});
+
+/* PROGRESS PAGE LINE CHART */
+new Chart(document.getElementById("progressChart"),{
+type:'line',
+data:{
+labels:['Paper 1','Paper 2','Paper 3','Paper 4','Paper 5','Paper 6','Paper 7','Paper 8','Paper 9','Paper 10'],
+datasets:[
+{ label:'Your Marks', data:[89,80,75,85,90,79,81,85,87,92], borderColor:'#89CFF0', backgroundColor:'rgba(137,207,240,0.2)', tension:0.4, fill:true },
+{ label:'Class Average', data:[65,72,68,75,60,67,78,65,61,70], borderColor:'orange', tension:0.4, fill:false }
+]
+},
+options:{ responsive:true, scales:{ y:{ beginAtZero:true, max:100 } } }
+});
+</script>
+
+</body>
+</html>
